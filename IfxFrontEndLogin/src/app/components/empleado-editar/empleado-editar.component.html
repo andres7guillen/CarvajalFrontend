@@ -1,0 +1,62 @@
+<h1>
+  Empleado <small>Nombre</small>  
+</h1>
+<hr>
+<div class="row text-right">
+  <div class="col">
+    <button 
+  routerLink="/empleados"
+  class="btn btn-danger">
+    <i class="fa fa-arrow-left"> Regresar</i>
+  </button>
+  </div>  
+</div>
+
+<div class="row animated fadeIn faster">
+  <div class="col">
+    <form (ngSubmit)="actualizarEmpleado(f)" #f="ngForm">
+      <div class="form-group">
+        <label>Nombres:</label>
+        <input type="text" [(ngModel)]="empleado.nombres" name="nombres" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Apellidos:</label>
+        <input type="text" [(ngModel)]="empleado.apellidos" name="apellidos" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Celular:</label>
+        <input type="text" [(ngModel)]="empleado.celular" name="celular" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="text" [(ngModel)]="empleado.email" name="email" required  class="form-control">
+      </div>
+
+      <!-- <div class="form-group">
+        <label>Entidad:</label>
+        <input type="text" [(ngModel)]="empleado.entidad" name="entidad" class="form-control">
+      </div> -->
+
+      <div class="form-group">
+        <label>Entidad:</label>
+          <select disabled class="w-50" [(ngModel)]="empleado.entidadId" name="entidadId">
+            <option  *ngFor="let entidad of listado; let i = index" [ngValue]="entidad.id">{{entidad.razonSocial}}</option>
+          </select>
+      </div>
+
+
+      <hr>
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary w-25">
+          <i class="fa fa-save"></i>
+          Editar
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
