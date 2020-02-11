@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.usuario = new Usuario();
-    this.usuario.email = 'andres07guillen@gmail.com';
-    this.usuario.PassWord = 'Y0k0gaWA_1992'
+    // this.usuario.email = 'andres07guillen@gmail.com';
+    // this.usuario.PassWord = 'Y0k0gaWA_1992'
   }
 
   
