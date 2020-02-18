@@ -6,13 +6,17 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 
-import { EntidadComponent } from './components/entidad/entidad.component';
+
 import { RolUsuarioComponent } from './components/rol-usuario/rol-usuario.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { EmpleadosComponent } from './components/empleados/empleados.component';
 import { EmpleadoDetalleComponent } from './components/empleado-detalle/empleado-detalle.component';
 import { EmpleadoEditarComponent } from './components/empleado-editar/empleado-editar.component';
 import { EmpleadoCrearComponent } from './components/empleado-crear/empleado-crear.component';
+import { EntidadListarComponent } from './components/entidad-listar/entidad-listar.component';
+import { EntidadCrearComponent } from './components/entidad-crear/entidad-crear.component';
+import { EntidadDetalleComponent } from './components/entidad-detalle/entidad-detalle.component';
+import { EntidadEditarComponent } from './components/entidad-editar/entidad-editar.component';
 
 
 const ROUTES: Routes = [
@@ -22,7 +26,10 @@ const ROUTES: Routes = [
   { path: 'empleadoDetalle/:id', component:EmpleadoDetalleComponent, canActivate:[ AuthGuard ] },
   { path: 'empleadoEditar/:id', component:EmpleadoEditarComponent, canActivate:[ AuthGuard ] },
   { path: 'empleadoCrear', component:EmpleadoCrearComponent, canActivate:[ AuthGuard ] },
-  { path: 'entidad/:id', component: EntidadComponent,canActivate:[ AuthGuard ] },
+  { path: 'entidadListar', component: EntidadListarComponent,canActivate:[ AuthGuard ] },
+  { path: 'entidadCrear', component: EntidadCrearComponent,canActivate:[ AuthGuard ] },
+  { path: 'entidadDetalle/:id', component: EntidadDetalleComponent,canActivate:[ AuthGuard ] },
+  { path: 'entidadEditar/:id', component: EntidadEditarComponent,canActivate:[ AuthGuard ] },
   { path: 'empleados', component: EmpleadosComponent,canActivate:[ AuthGuard ] },
   { path: 'rolUsuario', component: RolUsuarioComponent,canActivate:[ AuthGuard ]},
   { path: 'usuario', component:UsuarioComponent,canActivate:[ AuthGuard ]},

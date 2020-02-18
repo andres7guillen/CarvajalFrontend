@@ -4,21 +4,24 @@ import { LoginComponent } from '../pages/login/login.component';
 import { Usuario } from '../models/usuario.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { map } from 'rxjs/operators';
+import { Connections } from './ConnectionService';
+import { UsuarioRolModel } from '../models/usuario.rol.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userToken: string = ''; 
-  private url:string = 'https://localhost:44373/api/Cuenta';
+  userToken: string = '';   
   private headers = new HttpHeaders({
-    'Content-type': 'application/json'    
+    'Content-type': 'application/json',
+    "Authorization": "Bearer " + localStorage.getItem('token').toString()   
 });
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+              private conn:Connections) { }
   
   
   Login(usuario:Usuario) {
-    return this.http.post(this.url + '/Login', JSON.stringify(usuario),{headers: this.headers})
+    return this.http.post(this.conn.urlCuenta + '/Login', JSON.stringify(usuario),{headers: this.headers})
     .pipe(
       map(resp => {
         this.guardarToken(resp['token']);
@@ -32,7 +35,7 @@ export class AuthService {
   }
   
   CrearUsuario(usuario:Usuario) {
-    return this.http.post(this.url + '/Crear', JSON.stringify(usuario),{headers: this.headers})
+    return this.http.post(this.conn.urlCuenta + '/Crear', JSON.stringify(usuario),{headers: this.headers})
     .pipe(
       map(resp => {
         this.guardarToken(resp['token']);
@@ -57,6 +60,14 @@ export class AuthService {
 
   estaAutenticado():boolean {
     return this.userToken.length > 2;
+  }
+
+  asociarUsuarioRol(usuRol:UsuarioRolModel){
+    return this.http.post(this.conn.urlUsuario + 'AsignarRolUsuario', JSON.stringify(usuRol),{headers: this.headers});
+  }
+
+  RemoverUsuarioRol(usuRol:UsuarioRolModel){
+    return this.http.post(this.conn.urlUsuario + 'RemoverRolUsuario', JSON.stringify(usuRol),{headers:this.headers});
   }
 
 

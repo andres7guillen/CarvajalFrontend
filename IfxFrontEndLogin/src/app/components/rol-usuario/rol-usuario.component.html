@@ -1,3 +1,44 @@
-<p>
-  rol-usuario works!
-</p>
+<h4>Rol Usuario</h4>
+<hr>
+<!-- <div class="row text-right">
+  <div class="col">
+    <button 
+  routerLink="/entidadListar"
+  class="btn btn-danger">
+    <i class="fa fa-arrow-left"> Regresar</i>
+  </button>
+  </div>  
+</div> -->
+
+<div class="row animated fadeIn faster">
+  <div class="col">
+    <form  #f="ngForm">
+      <div class="form-group">
+        <label>Correo:</label>
+        <input type="text" [(ngModel)]="usuarioRol.UsuarioEmail" name="email" required class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Rol:</label>
+        <input maxlength="40" type="text" [(ngModel)]="usuarioRol.Rol" name="rol" class="form-control">
+      </div>
+    
+      <hr>
+      <div class="form-group text-center">
+        <button (click)="asociar()" type="button" class="btn btn-primary w-25">
+          <i class="fa fa-save"></i>
+          Asociar
+        </button>
+      </div>
+
+      <div class="form-group text-center">
+        <button (click)="remover()" type="button" class="btn btn-primary w-25">
+          <i class="fa fa-save"></i>
+          Remover
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>

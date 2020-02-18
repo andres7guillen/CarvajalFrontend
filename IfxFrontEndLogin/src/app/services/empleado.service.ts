@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EmpleadoModel } from '../models/empleado.model';
 import { map } from 'rxjs/operators';
+import { Connections } from './ConnectionService';
 
 
 
@@ -10,35 +11,36 @@ import { map } from 'rxjs/operators';
 })
 export class EmpleadoService {
 
-  private url:string = "https://localhost:44373/api/Empleado/";
+  
   private headers = new HttpHeaders({
     'Content-type': 'application/json' ,
     "Authorization": "Bearer " + localStorage.getItem('token').toString()   
 });
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+              private conn:Connections) { }
 
   crearEmpleado(empleado:EmpleadoModel){
-    return this.http.post(this.url + "Crear",JSON.stringify(empleado),{headers: this.headers});
+    return this.http.post(this.conn.urlEmpleado + "Crear",JSON.stringify(empleado),{headers: this.headers});
   }
 
   actualizarEmpleado(empleado:EmpleadoModel){
-    return this.http.put(this.url + "Actualizar",JSON.stringify(empleado),{headers: this.headers})
+    return this.http.put(this.conn.urlEmpleado + "Actualizar",JSON.stringify(empleado),{headers: this.headers})
   }
 
   obtenerEmpleados(){
-    return this.http.get(this.url + 'ObtenerTodos')
+    return this.http.get(this.conn.urlEmpleado + 'ObtenerTodos')
     .pipe(
       map(this.crearArreglo)
     );
   }
 
   obtenerEmpleadoPorId(id:string){
-    return this.http.get(this.url + 'ObtenerPorId?IdEmpleado='  + id);
+    return this.http.get(this.conn.urlEmpleado + 'ObtenerPorId?IdEmpleado='  + id);
   }
 
   borrarEmpleado(id:string){
-    return this.http.delete(this.url + 'Delete?EmpleadoId=' + id,{headers: this.headers});
+    return this.http.delete(this.conn.urlEmpleado + 'Delete?EmpleadoId=' + id,{headers: this.headers});
   }
 
   private crearArreglo(empleadosObj:object){
